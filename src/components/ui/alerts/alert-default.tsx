@@ -131,7 +131,10 @@ export const alert = (config: AlertConfig): Promise<boolean> => {
     const handleClose = () => {
       isOpen = false
       root.unmount()
-      document.body.removeChild(container)
+      // Güvenli kaldırma: container hâlâ body'de mi kontrol et
+      if (container.parentNode === document.body) {
+        document.body.removeChild(container)
+      }
       resolve(false)
     }
 
