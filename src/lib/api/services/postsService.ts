@@ -8,10 +8,10 @@ export class PostsService {
   constructor(websiteId?: string) {
     if (websiteId) {
       // Server-side usage with websiteId
-      this.api = useServerApi(websiteId); // v1 default
+      this.api = useServerApi(websiteId, { version: "v2" });
     } else {
       // Client-side usage
-      this.api = useApi(); // v1 default
+      this.api = useApi({ version: "v2" });
     }
   }
 

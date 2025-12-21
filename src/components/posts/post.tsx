@@ -234,7 +234,7 @@ export default function Post() {
           <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
             <div className="flex items-center gap-2 bg-background/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border/50">
               <User className="w-4 h-4" />
-              <span className="font-medium text-foreground">{post.author?.username || "Yazar Yok"}</span>
+              <span className="font-medium text-foreground">{post.author?.username || post.authorName || "Yazar Yok"}</span>
             </div>
             <div className="flex items-center gap-2 bg-background/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-border/50">
               <Calendar className="w-4 h-4" />

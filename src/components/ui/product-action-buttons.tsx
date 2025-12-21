@@ -56,6 +56,26 @@ export default function ProductActionButtons({
               type: "error",
             });
           }
+        }).catch((error) => {
+          if (error.type === "insufficient_balance") {
+            alert({
+              title: "Yetersiz Bakiye",
+              message: "Bu ürünü satın almak için yeterli bakiyeniz bulunmamaktadır.",
+              type: "warning",
+              confirmText: "Bakiye Yükle",
+              cancelText: "İptal",
+              showCancel: true,
+              onConfirm: () => {
+                router.push("/wallet");
+              },
+            });
+          } else {
+            alert({
+              title: "Satın Alım Hatası",
+              message: error.message || "Bir hata oluştu.",
+              type: "error",
+            });
+          }
         });
       },
     });

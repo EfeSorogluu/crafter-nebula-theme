@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import imageLinkGenerate from "@/lib/helpers/imageLinkGenerate";
 import { Website } from "@/lib/types/website";
-import { Copy, Gamepad2, MessageCircle, Server as ServerIcon, Users } from "lucide-react";
+import { Copy, Gamepad2, Server as ServerIcon, Users, UserPlus } from "lucide-react";
+import { FaDiscord } from "react-icons/fa6";
 import Image from "next/image";
 import { toast } from "sonner";
 import OnlinePlayerCount from "./online-player-count";
@@ -12,9 +13,10 @@ import OnlinePlayerCount from "./online-player-count";
 interface HomeHeroProps {
   website: Website;
   discordStatus: any;
+  userCount?: number;
 }
 
-export default function HomeHero({ website, discordStatus }: HomeHeroProps) {
+export default function HomeHero({ website, discordStatus, userCount }: HomeHeroProps) {
   const servers = website.servers || [];
   const mainServer = servers.find((server) => server.port === 25565) || servers[0];
   const serverIp = mainServer?.ip || "play.example.com";
@@ -27,7 +29,7 @@ export default function HomeHero({ website, discordStatus }: HomeHeroProps) {
   return (
     <div className="relative w-full -mt-16 mb-12">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 h-[600px] w-full overflow-hidden">
+      <div className="absolute top-0 left-[50%] ml-[-50vw] w-[100vw] h-[600px] overflow-hidden">
         <Image
           src={imageLinkGenerate(website.theme.header.bannerImage)}
           alt="Hero Background"
@@ -77,7 +79,7 @@ export default function HomeHero({ website, discordStatus }: HomeHeroProps) {
             asChild
           >
             <a href={discordStatus.invite} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="mr-2 w-6 h-6" />
+              <FaDiscord className="mr-2 w-6 h-6" />
               DISCORD
             </a>
           </Button>
@@ -121,18 +123,18 @@ export default function HomeHero({ website, discordStatus }: HomeHeroProps) {
           <Card className="bg-card/95 backdrop-blur border-primary/20 shadow-xl">
             <CardContent className="p-6 flex items-center gap-4">
               <div className="p-3 rounded-lg bg-green-500/10 text-green-500">
-                <ServerIcon className="w-8 h-8" />
+                <UserPlus className="w-8 h-8" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground font-medium">Sunucu Durumu</p>
-                <h3 className="text-2xl font-bold text-green-500">Aktif</h3>
+                <p className="text-sm text-muted-foreground font-medium">Kayıtlı Kullanıcı</p>
+                <h3 className="text-2xl font-bold text-green-500">{userCount || website.users?.length || 0}</h3>
               </div>
             </CardContent>
           </Card>
           <Card className="bg-card/95 backdrop-blur border-primary/20 shadow-xl">
             <CardContent className="p-6 flex items-center gap-4">
               <div className="p-3 rounded-lg bg-indigo-500/10 text-indigo-500">
-                <MessageCircle className="w-8 h-8" />
+                <FaDiscord className="w-8 h-8" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Discord Üyesi</p>

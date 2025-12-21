@@ -19,7 +19,8 @@ import {
   Youtube,
   Sun,
   Moon,
-  Settings
+  Settings,
+  Gift
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -270,6 +271,11 @@ const Navbar = forwardRef<
                     <DropdownMenuItem asChild className="cursor-pointer">
                       <Link href="/chest" className="w-full font-medium">
                         Sandık
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                      <Link href="/gifts" className="w-full font-medium">
+                        Hediye Gönder
                       </Link>
                     </DropdownMenuItem>
                     

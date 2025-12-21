@@ -100,12 +100,12 @@ export default function PostCard({ post, className }: PostCardProps) {
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
-                <span>{formatDate(post.createdAt)}</span>
+                <span>{formatDate(post.publishedAt || post.createdAt)}</span>
               </div>
               <span>•</span>
               <div className="flex items-center gap-1">
                 <User className="w-3 h-3" />
-                <span>{post.author?.username || 'Yönetici'}</span>
+                <span>{post.author?.username || post.authorName || 'Yönetici'}</span>
               </div>
             </div>
             

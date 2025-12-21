@@ -8,10 +8,11 @@ export interface WebsitePost {
     content: string;
     type: 'news' | 'announcement' | 'blog' | 'update';
     status: 'draft' | 'published' | 'archived';
-    author: {
+    author?: {
         id: string;
         username: string;
     };
+    authorName?: string;
     categoryId?: string;
     categoryName?: string;
     featuredImage?: string;

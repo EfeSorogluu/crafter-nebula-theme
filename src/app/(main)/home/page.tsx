@@ -23,6 +23,7 @@ import {
   Server as ServerIcon,
   Star
 } from "lucide-react";
+import { FaDiscord } from "react-icons/fa6";
 import Link from "next/link";
 import { getDiscordStatus } from "@/lib/helpers/statusHelper";
 import Image from "next/image";
@@ -185,12 +186,12 @@ export default async function Home() {
             {/* Discord Widget */}
             <Card className="overflow-hidden border-none shadow-lg bg-[#5865F2] text-white relative">
               <div className="absolute top-0 right-0 p-4 opacity-10">
-                <MessageCircle className="w-32 h-32" />
+                <FaDiscord className="w-24 h-24" />
               </div>
               <CardContent className="p-6 relative z-10">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                    <MessageCircle className="w-6 h-6" />
+                    <FaDiscord className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">Discord Sunucusu</h3>
