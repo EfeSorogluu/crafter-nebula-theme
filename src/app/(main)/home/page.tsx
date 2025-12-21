@@ -103,7 +103,11 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen pb-20">
-      <HomeHero website={website} discordStatus={discordStatus} />
+      <HomeHero 
+        website={website} 
+        discordStatus={discordStatus} 
+        userCount={websiteStatistics.totalUsers}
+      />
 
       <div className="container mx-auto px-4 pt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
