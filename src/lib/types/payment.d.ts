@@ -8,6 +8,9 @@ export interface PaymentProvider {
   minAmount: number;
   maxAmount: number;
   description: string;
+  creditMultiplier?: number;
+  credit_multiplier?: number; // Backend snake_case support
+  creditMultipler?: number; // Typo support
 }
 
 export interface InitiatePaymentData {

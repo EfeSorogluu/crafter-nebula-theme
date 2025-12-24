@@ -40,6 +40,8 @@ export interface GetWebsiteStatisticsResponse {
       username: string;
     }[];
   };
+  totalUsers: number;
+  topCreditLoaders: any[];
 }
 
 export class WebsiteService {

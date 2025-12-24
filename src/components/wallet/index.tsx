@@ -52,6 +52,7 @@ interface PaymentMethod {
   name: string;
   icon: React.ReactNode;
   description: string;
+  creditMultiplier?: number;
 }
 
 interface WalletProps {
@@ -156,6 +157,7 @@ export default function Wallet({ paymentId, event }: WalletProps) {
             name: provider.name,
             icon: <CreditCard className="h-5 w-5" />,
             description: provider.description,
+            creditMultiplier: provider.creditMultipler || 1,
           }))
         );
       })
@@ -611,6 +613,22 @@ export default function Wallet({ paymentId, event }: WalletProps) {
               </div>
 
               {/* Onay Checkbox */}
+              {selectedPaymentMethod && paymentMethods.find(p => p.id === selectedPaymentMethod)?.creditMultiplier && (paymentMethods.find(p => p.id === selectedPaymentMethod)?.creditMultiplier || 0) > 1 && (
+                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 space-y-2">
+                  <div className="flex items-center gap-2 text-green-500 font-bold">
+                    <Sparkles className="w-5 h-5" />
+                    {paymentMethods.find(p => p.id === selectedPaymentMethod)?.creditMultiplier}x Kredi Kazanımı!
+                  </div>
+                  <p className="text-sm text-green-600/80">
+                    {paymentMethods.find(p => p.id === selectedPaymentMethod)?.name} ile ödeme yaptığınızda <span className="font-bold line-through opacity-70">{amount || "0.00"} TRY</span> yerine <span className="font-bold text-green-600">{(parseFloat(amount || "0") * (paymentMethods.find(p => p.id === selectedPaymentMethod)?.creditMultiplier || 1)).toFixed(2)} TRY</span> bakiye kazanacaksınız!
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-green-600/70">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                    Ekstra {(parseFloat(amount || "0") * ((paymentMethods.find(p => p.id === selectedPaymentMethod)?.creditMultiplier || 1) - 1)).toFixed(2)} TRY bonus!
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-start space-x-3 pt-2">
                 <Switch
                   id="terms"
@@ -697,7 +715,14 @@ export default function Wallet({ paymentId, event }: WalletProps) {
                       {method.icon}
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-foreground">{method.name}</div>
+                      <div className="font-bold text-foreground flex items-center gap-2">
+                        {method.name}
+                        {method.creditMultiplier && method.creditMultiplier > 1 && (
+                          <Badge variant="secondary" className="bg-green-500/10 text-green-500 hover:bg-green-500/20 border-green-500/20">
+                            {method.creditMultiplier}x Kredi
+                          </Badge>
+                        )}
+                      </div>
                       <div className="text-xs text-muted-foreground">
                         {method.description}
                       </div>

@@ -4,6 +4,7 @@ import { AuthProvider } from "@/lib/context/AuthContext";
 import { CartProvider } from "@/lib/context/CartContext";
 import { Toaster } from "@/components/ui/sonner";
 import { useEffect } from "react";
+import SmoothScroll from "@/components/smooth-scroll";
 
 export default function Providers({
   children,
@@ -24,6 +25,7 @@ export default function Providers({
   return (
     <AuthProvider logo={logo}>
       <CartProvider>
+        <SmoothScroll />
         {children}
         <Toaster />
       </CartProvider>

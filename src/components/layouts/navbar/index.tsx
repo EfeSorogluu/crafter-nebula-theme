@@ -20,7 +20,8 @@ import {
   Sun,
   Moon,
   Settings,
-  Gift
+  Gift,
+  Megaphone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -63,8 +64,9 @@ const Navbar = forwardRef<
     navbarLinks: Theme["navbar"];
     serverConfig: { ip: string; port: number };
     socialMedia: Website["social_media"];
+    broadcastItems?: string[];
   }
->(({ websiteName, logoImage, navbarLinks, serverConfig, socialMedia }, ref) => {
+>(({ websiteName, logoImage, navbarLinks, serverConfig, socialMedia, broadcastItems }, ref) => {
   const { isAuthenticated, user, signOut, isLoading } = useContext(AuthContext);
   const { getItemCount, openCart, closeCart, isCartOpen } = useCart();
   const router = useRouter();
@@ -106,7 +108,7 @@ const Navbar = forwardRef<
   return (
     <>
       <div className="hidden lg:block bg-black/90 text-white py-2 border-b border-white/5">
-        <div className="container mx-auto px-4 flex justify-between items-center text-xs font-medium">
+        <div className="container mx-auto px-4 flex justify-between items-center text-xs font-medium relative">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 text-white/70">
               <Globe className="w-3 h-3" />
@@ -115,6 +117,20 @@ const Navbar = forwardRef<
             <span className="w-px h-3 bg-white/10" />
             <span className="text-green-400">{status?.online || 0} Oyuncu Çevrimiçi</span>
           </div>
+
+          {broadcastItems && broadcastItems.length > 0 && (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden max-w-[40%] w-full h-full flex items-center">
+              <div className="animate-marquee flex items-center gap-8 text-white/90 pause-on-hover whitespace-nowrap">
+                {broadcastItems.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Megaphone className="w-3 h-3 text-yellow-400 flex-shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex items-center gap-3">
             {socialMedia?.discord && (
               <a href={socialMedia.discord} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
