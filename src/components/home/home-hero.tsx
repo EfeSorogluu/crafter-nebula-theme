@@ -138,7 +138,7 @@ export default function HomeHero({ website, discordStatus, userCount }: HomeHero
               </div>
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Discord Üyesi</p>
-                <h3 className="text-2xl font-bold">{discordStatus.online} Online</h3>
+                <h3 className="text-2xl font-bold">{discordStatus.online} Çevrimiçi Üye</h3>
               </div>
             </CardContent>
           </Card>

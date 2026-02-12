@@ -13,9 +13,10 @@ import { AuthContext } from "@/lib/context/AuthContext";
 interface CartProps {
   isOpen: boolean;
   onClose: () => void;
+  currency: string;
 }
 
-export default function Cart({ isOpen, onClose }: CartProps) {
+export default function Cart({ isOpen, onClose, currency }: CartProps) {
   const { isAuthenticated, isLoading, user } = useContext(AuthContext);
   const {
     state: cartState,
@@ -154,19 +155,19 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                       {item.hasProductDiscount ? (
                         <div className="flex items-center gap-2 text-sm">
                           <span className="line-through text-muted-foreground">
-                            {item.price}₺
+                            {item.price}{currency}
                           </span>
                           <span className="font-medium text-primary">
-                            {item.discountedPrice}₺
+                            {item.discountedPrice}{currency}
                           </span>
                           <Badge variant="destructive" className="text-xs">
                             {item.productDiscountType === "percentage"
                               ? `%${item.productDiscountValue}`
-                              : `${item.productDiscountValue}₺`}
+                              : `${item.productDiscountValue}${currency}`}
                           </Badge>
                         </div>
                       ) : (
-                        <span className="font-medium">{item.price}₺</span>
+                        <span className="font-medium">{item.price}{currency}</span>
                       )}
                     </div>
 
@@ -195,7 +196,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                         </Button>
                       </div>
                       <span className="font-medium">
-                        {item.discountedPrice * item.quantity}₺
+                        {item.discountedPrice * item.quantity}{currency}
                       </span>
                     </div>
                   </div>
@@ -220,7 +221,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                       <p className="text-xs text-blue-600 dark:text-blue-400">
                         {cartState.bulkDiscount.type === "percentage"
                           ? `%${cartState.bulkDiscount.amount} indirim`
-                          : `${cartState.bulkDiscount.amount}₺ indirim`}
+                          : `${cartState.bulkDiscount.amount}${currency} indirim`}
                       </p>
                     </div>
                   </div>
@@ -238,7 +239,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                         <p className="text-xs text-green-600 dark:text-green-400">
                           {cartState.coupon.discountType === "percentage"
                             ? `%${cartState.coupon.discountValue} indirim`
-                            : `${cartState.coupon.discountValue}₺ indirim`}
+                            : `${cartState.coupon.discountValue}${currency} indirim`}
                         </p>
                       </div>
                       <Button
@@ -290,7 +291,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                       (sum, item) => sum + item.price * item.quantity,
                       0
                     )}
-                    ₺
+                    {currency}
                   </span>
                 </div>
 
@@ -312,7 +313,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                           return sum;
                         }, 0)
                         .toFixed(2)}
-                      ₺
+                      {currency}
                     </span>
                   </div>
                 )}
@@ -327,8 +328,8 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                         ? `${(
                             (getSubtotal() * cartState.bulkDiscount.amount) /
                             100
-                          ).toFixed(2)}₺`
-                        : `${cartState.bulkDiscount.amount}₺`}
+                          ).toFixed(2)}${currency}`
+                        : `${cartState.bulkDiscount.amount}${currency}`}
                     </span>
                   </div>
                 )}
@@ -343,21 +344,21 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                         ? `${(
                             (getSubtotal() * cartState.coupon.discountValue) /
                             100
-                          ).toFixed(2)}₺`
-                        : `${cartState.coupon.discountValue}₺`}
+                          ).toFixed(2)}${currency}`
+                        : `${cartState.coupon.discountValue}${currency}`}
                     </span>
                   </div>
                 )}
 
                 <div className="flex items-center justify-between text-lg font-semibold border-t border-border pt-2">
                   <span>Final Toplam:</span>
-                  <span>{getTotal()}₺</span>
+                  <span>{getTotal()}{currency}</span>
                 </div>
 
                 {/* Total Savings */}
                 {getDiscount() > 0 && (
                   <div className="text-sm text-green-600 dark:text-green-400 text-center pt-2 border-t border-border">
-                    🎉 Toplam {getDiscount().toFixed(2)}₺ tasarruf ettiniz!
+                    🎉 Toplam {getDiscount().toFixed(2)}{currency} tasarruf ettiniz!
                   </div>
                 )}
               </div>

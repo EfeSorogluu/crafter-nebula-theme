@@ -47,6 +47,7 @@ export default async function MainLayout({
         serverConfig={serverConfig}
         socialMedia={website.social_media}
         broadcastItems={website.broadcast_items}
+        currency={website.currency}
       />
       <div className="glide-scroll antialiased pt-16">
         {/* Hero removed from global layout to allow custom homepage design */}

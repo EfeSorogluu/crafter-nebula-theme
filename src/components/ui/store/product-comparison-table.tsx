@@ -93,8 +93,8 @@ export default function ProductComparisonTable({
       USD: "$",
       EUR: "€",
     };
-    const symbol = currencySymbols[currency] || "₺";
-    return `${price.toFixed(2)}${symbol}`;
+    const symbol = currencySymbols[currency] || currency;
+    return `${price.toFixed(2)} ${symbol}`;
   };
 
   const getFeatureValue = (product: Product, addonId: string, featureId: string): { included: boolean; customValue?: string | null } => {

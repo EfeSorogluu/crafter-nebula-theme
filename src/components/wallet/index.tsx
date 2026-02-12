@@ -58,9 +58,10 @@ interface PaymentMethod {
 interface WalletProps {
   paymentId?: string | null;
   event?: string | null;
+  currency: string;
 }
 
-export default function Wallet({ paymentId, event }: WalletProps) {
+export default function Wallet({ paymentId, event, currency }: WalletProps) {
   const router = useRouter();
   const WEBSITE_ID = typeof window !== 'undefined' ? localStorage.getItem("websiteId") : null;
   const { isAuthenticated, isLoading, user, reloadUser } =
@@ -434,7 +435,7 @@ export default function Wallet({ paymentId, event }: WalletProps) {
                     maximumFractionDigits: 2
                   })}
                 </span>
-                <span className="text-xl font-medium text-blue-200">₺</span>
+                <span className="text-xl font-medium text-blue-200">{currency}</span>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-blue-100 text-sm max-w-[60%]">
@@ -582,9 +583,9 @@ export default function Wallet({ paymentId, event }: WalletProps) {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-base">Yüklenecek Miktar (₺) <span className="text-red-500">*</span></Label>
+                <Label htmlFor="amount" className="text-base">Yüklenecek Miktar ({currency}) <span className="text-red-500">*</span></Label>
                 <div className="relative">
-                  <span className="absolute left-4 top-3.5 text-lg font-bold text-muted-foreground">₺</span>
+                  <span className="absolute left-4 top-3.5 text-lg font-bold text-muted-foreground">{currency}</span>
                   <Input
                     id="amount"
                     type="text"
@@ -599,7 +600,7 @@ export default function Wallet({ paymentId, event }: WalletProps) {
               <div className="p-4 rounded-xl bg-muted/30 space-y-3 border border-border/50">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Yüklenecek Kredi:</span>
-                  <span className="font-medium">₺{amount || "0.00"}</span>
+                  <span className="font-medium">{currency}{amount || "0.00"}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">İşlem Ücreti:</span>
@@ -608,7 +609,7 @@ export default function Wallet({ paymentId, event }: WalletProps) {
                 <Separator className="bg-border/50" />
                 <div className="flex justify-between text-lg font-bold">
                   <span>Toplam Tutar:</span>
-                  <span className="text-primary">₺{amount || "0.00"}</span>
+                  <span className="text-primary">{currency}{amount || "0.00"}</span>
                 </div>
               </div>
 

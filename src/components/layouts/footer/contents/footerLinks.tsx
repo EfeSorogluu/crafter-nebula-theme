@@ -4,13 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import imageLinkGenerate from "@/lib/helpers/imageLinkGenerate";
 import { 
-  Twitter, 
   Instagram, 
   Youtube, 
-  MessageCircle, 
   Github,
   Music2
 } from "lucide-react";
+import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Website } from "@/lib/types/website";
 
 interface FooterLinksProps {
@@ -63,12 +62,12 @@ export default function FooterLinks({
         </p>
 
         <div className="flex items-center gap-2 flex-wrap">
-          {socialMedia?.discord && <SocialButton icon={<MessageCircle className="w-4 h-4" />} href={socialMedia.discord} label="Discord" />}
-          {socialMedia?.twitter && <SocialButton icon={<Twitter className="w-4 h-4" />} href={socialMedia.twitter} label="Twitter" />}
-          {socialMedia?.instagram && <SocialButton icon={<Instagram className="w-4 h-4" />} href={socialMedia.instagram} label="Instagram" />}
-          {socialMedia?.youtube && <SocialButton icon={<Youtube className="w-4 h-4" />} href={socialMedia.youtube} label="Youtube" />}
-          {socialMedia?.tiktok && <SocialButton icon={<Music2 className="w-4 h-4" />} href={socialMedia.tiktok} label="TikTok" />}
-          {socialMedia?.github && <SocialButton icon={<Github className="w-4 h-4" />} href={socialMedia.github} label="GitHub" />}
+          {socialMedia?.discord?.trim() && <SocialButton icon={<FaDiscord className="w-4 h-4" />} href={socialMedia.discord} label="Discord" />}
+          {socialMedia?.twitter?.trim() && <SocialButton icon={<FaXTwitter className="w-4 h-4" />} href={socialMedia.twitter} label="X" />}
+          {socialMedia?.instagram?.trim() && <SocialButton icon={<Instagram className="w-4 h-4" />} href={socialMedia.instagram} label="Instagram" />}
+          {socialMedia?.youtube?.trim() && <SocialButton icon={<Youtube className="w-4 h-4" />} href={socialMedia.youtube} label="Youtube" />}
+          {socialMedia?.tiktok?.trim() && <SocialButton icon={<Music2 className="w-4 h-4" />} href={socialMedia.tiktok} label="TikTok" />}
+          {socialMedia?.github?.trim() && <SocialButton icon={<Github className="w-4 h-4" />} href={socialMedia.github} label="GitHub" />}
         </div>
       </div>
 

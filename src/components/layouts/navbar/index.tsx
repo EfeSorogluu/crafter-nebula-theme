@@ -13,8 +13,6 @@ import {
   ShoppingCart,
   Gamepad2,
   Globe,
-  MessageCircle,
-  Twitter,
   Instagram,
   Youtube,
   Sun,
@@ -23,6 +21,7 @@ import {
   Gift,
   Megaphone
 } from "lucide-react";
+import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Theme, Website } from "@/lib/types/website";
@@ -65,8 +64,9 @@ const Navbar = forwardRef<
     serverConfig: { ip: string; port: number };
     socialMedia: Website["social_media"];
     broadcastItems?: string[];
+    currency: string;
   }
->(({ websiteName, logoImage, navbarLinks, serverConfig, socialMedia, broadcastItems }, ref) => {
+>(({ websiteName, logoImage, navbarLinks, serverConfig, socialMedia, broadcastItems, currency }, ref) => {
   const { isAuthenticated, user, signOut, isLoading } = useContext(AuthContext);
   const { getItemCount, openCart, closeCart, isCartOpen } = useCart();
   const router = useRouter();
@@ -120,34 +120,34 @@ const Navbar = forwardRef<
 
           {broadcastItems && broadcastItems.length > 0 && (
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden max-w-[40%] w-full h-full flex items-center">
-              <div className="animate-marquee flex items-center gap-8 text-white/90 pause-on-hover whitespace-nowrap">
+              <div className="animate-marquee inline-flex items-center gap-8 text-white/90 pause-on-hover whitespace-nowrap">
                 {broadcastItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2">
+                  <span key={i} className="inline-flex items-center gap-2">
                     <Megaphone className="w-3 h-3 text-yellow-400 flex-shrink-0" />
                     <span>{item}</span>
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
           )}
 
           <div className="flex items-center gap-3">
-            {socialMedia?.discord && (
+            {socialMedia?.discord?.trim() && (
               <a href={socialMedia.discord} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <MessageCircle className="w-3 h-3" />
+                <FaDiscord className="w-3 h-3" />
               </a>
             )}
-            {socialMedia?.twitter && (
+            {socialMedia?.twitter?.trim() && (
               <a href={socialMedia.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <Twitter className="w-3 h-3" />
+                <FaXTwitter className="w-3 h-3" />
               </a>
             )}
-            {socialMedia?.instagram && (
+            {socialMedia?.instagram?.trim() && (
               <a href={socialMedia.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 <Instagram className="w-3 h-3" />
               </a>
             )}
-            {socialMedia?.youtube && (
+            {socialMedia?.youtube?.trim() && (
               <a href={socialMedia.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 <Youtube className="w-3 h-3" />
               </a>
@@ -280,7 +280,7 @@ const Navbar = forwardRef<
                       <Link href="/wallet" className="w-full flex justify-between items-center font-medium">
                         Cüzdan
                         <Badge variant="secondary" className="ml-auto bg-green-500/10 text-green-500 hover:bg-green-500/20">
-                          {user.balance} ₺
+                          {user.balance} {currency}
                         </Badge>
                       </Link>
                     </DropdownMenuItem>
@@ -391,7 +391,7 @@ const Navbar = forwardRef<
       </header>
 
       {/* Cart Sidebar */}
-      <Cart isOpen={isCartOpen} onClose={closeCart} />
+      <Cart isOpen={isCartOpen} onClose={closeCart} currency={currency} />
     </>
   );
 });

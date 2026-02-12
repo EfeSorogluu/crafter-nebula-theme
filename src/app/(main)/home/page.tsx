@@ -148,7 +148,7 @@ export default async function Home() {
                       <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
                         <h3 className="text-lg font-bold text-white mb-1">{product.name}</h3>
                         <div className="flex items-center justify-between">
-                          <span className="text-green-400 font-bold">{product.price} ₺</span>
+                          <span className="text-green-400 font-bold">{product.price} {website.currency}</span>
                           <Button size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity" asChild>
                             <Link href={`/store/product/${product.id}`}>İncele</Link>
                           </Button>
@@ -246,7 +246,7 @@ export default async function Home() {
                         <p className="text-xs text-muted-foreground">Kredi Yükledi</p>
                       </div>
                       <Badge variant="outline" className="font-mono">
-                        {topup.amount}₺
+                        {topup.amount}{website.currency}
                       </Badge>
                     </div>
                   ))
