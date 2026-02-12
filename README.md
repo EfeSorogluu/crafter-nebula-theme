@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🌌 Crafter Nebula Theme
 
-First, run the development server:
+**Minecraft sunucuları için modern, güçlü ve özelleştirilebilir web teması.**
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)
+
+</div>
+
+---
+
+## ✨ Özellikler
+
+| Özellik | Açıklama |
+|---|---|
+| 🏪 **Mağaza** | Kategori bazlı ürün listeleme, ürün karşılaştırma tablosu, sepet, kupon & toplu indirim |
+| 🗳️ **Oy Sistemi** | Birden fazla vote provider desteği ile oy verme ve ödül kazanma |
+| 💰 **Cüzdan** | Kredi yükleme, çoklu ödeme sağlayıcı (PayTR, Shopier, Papara, İyzico) |
+| 🎁 **Hediye & Sandık** | Hediye gönderme ve sandık açma sistemi |
+| 📰 **Haberler** | Lexical editör ile zengin içerikli haber/duyuru yönetimi |
+| 🎫 **Destek** | Kategori bazlı ticket destek sistemi |
+| 📋 **Staff Başvuru** | Özelleştirilebilir personel başvuru formları |
+| ❓ **Yardım Merkezi** | SSS ve yardım dokümanları |
+| ⚖️ **Yasal Sayfalar** | Kurallar, gizlilik politikası, kullanım şartları |
+| 🔍 **Ceza Sorgulama** | Oyuncu ceza geçmişi sorgulama |
+| 🎟️ **Kod Kullanma** | Redeem code sistemi |
+| 👤 **Profil** | Kullanıcı profili ve ayarlar |
+
+## 🛠️ Teknolojiler
+
+- **Framework:** [Next.js 16](https://nextjs.org) (App Router, Turbopack)
+- **UI:** [Tailwind CSS 4](https://tailwindcss.com), [Radix UI](https://radix-ui.com), [shadcn/ui](https://ui.shadcn.com)
+- **Animasyon:** [Motion](https://motion.dev), [Lenis](https://lenis.darkroom.engineering) (smooth scroll)
+- **Editör:** [Lexical](https://lexical.dev) (zengin metin editörü)
+- **İkonlar:** [Lucide](https://lucide.dev), [React Icons](https://react-icons.github.io/react-icons)
+- **Form:** [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev)
+- **Tema:** Dark / Light mod desteği ([next-themes](https://github.com/pacocoursey/next-themes))
+- **PWA:** Service Worker, manifest.json, kurulum butonu
+
+## 🚀 Kurulum
+
+### Gereksinimler
+
+- [Node.js](https://nodejs.org) 18+
+- [npm](https://npmjs.com), [yarn](https://yarnpkg.com) veya [pnpm](https://pnpm.io)
+
+### Adımlar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1. Repoyu klonlayın
+git clone https://github.com/Rynix01/crafter-nebula-theme.git
+cd crafter-nebula-theme
+
+# 2. Bağımlılıkları yükleyin
+npm install
+
+# 3. Ortam değişkenlerini ayarlayın
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.local` dosyasını düzenleyin:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_BACKEND_URL=https://api.crafter.net.tr
+NEXT_PUBLIC_WEBSITE_ID=your-website-id
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 4. Geliştirme sunucusunu başlatın
+npm run dev
+```
 
-## Learn More
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 Scriptler
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Komut | Açıklama |
+|---|---|
+| `npm run dev` | Geliştirme sunucusu (Turbopack) |
+| `npm run build` | Production build (Webpack) |
+| `npm run start` | Production sunucusu |
+| `npm run lint` | ESLint kod kontrolü |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Proje Yapısı
 
-## Deploy on Vercel
+```
+src/
+├── app/
+│   ├── (main)/              # Ana sayfa rotaları
+│   │   ├── home/            # Anasayfa
+│   │   ├── store/           # Mağaza
+│   │   ├── vote/            # Oy verme
+│   │   ├── wallet/          # Cüzdan
+│   │   ├── profile/         # Profil
+│   │   ├── support/         # Destek
+│   │   ├── chest/           # Sandık
+│   │   ├── gifts/           # Hediyeler
+│   │   ├── posts/           # Haberler
+│   │   └── ...
+│   ├── auth/                # Giriş / Kayıt
+│   └── api/                 # API rotaları
+├── components/
+│   ├── layouts/             # Navbar, Footer, Hero
+│   ├── ui/                  # shadcn/ui bileşenleri
+│   ├── home/                # Anasayfa bileşenleri
+│   ├── editor/              # Lexical editör
+│   └── ...
+└── lib/
+    ├── api/services/        # API servisleri
+    ├── context/             # Auth, Cart context
+    ├── types/               # TypeScript tipleri
+    ├── helpers/             # Yardımcı fonksiyonlar
+    └── constants/           # Sabitler
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌐 Entegrasyonlar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Discord** — Sunucu widget'ı, çevrimiçi üye sayısı, webhook desteği
+- **Tawk.to** — Canlı destek chat widget'ı
+- **Minecraft** — Gerçek zamanlı sunucu durumu ve oyuncu sayısı
+- **Cloudflare Turnstile** — Bot koruması
+
+## 📄 Lisans
+
+Bu proje [Crafter](https://crafter.net.tr) altyapısı için geliştirilmiştir.
